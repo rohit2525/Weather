@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+weather:
+  api:
+    key: d2929e9483efc82c82c32ee7e02d563e
+    url: https://api.openweathermap.org/data/2.5/forecast
+    fallback-path: classpath:mock-forecast.json
+    cnt: 24  # Approx. 3 days if each item is 3-hour interval
+    offline-mode: false
+
+spring:
+  jackson:
+    date-format: yyyy-MM-dd'T'HH:mm:ss
+    time-zone: UTC
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, prometheus, env, beans
+  endpoint:
+    health:
+      show-details: always
+
+info:
+  app:
+    name: Weather Forecast Service
+    description: Provides 3-day weather forecasts and suggestions
+    version: 1.0.0
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+
