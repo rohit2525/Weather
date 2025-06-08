@@ -3,6 +3,7 @@ package org.example.weather.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.example.weather.exception.CityNotFoundException;
 import org.example.weather.exception.ErrorResponse;
+import org.example.weather.exception.WeatherDataUnavailableException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,7 +27,7 @@ public class WeatherExceptionHandler {
    * @param ex The CityNotFoundException that was thrown.
    * @return A ResponseEntity containing an ErrorResponse and HTTP status 404.
    */
-  @ExceptionHandler(CityNotFoundException.class)
+  @ExceptionHandler({CityNotFoundException.class, WeatherDataUnavailableException.class})
   public ResponseEntity<ErrorResponse> handleCityNotFound(CityNotFoundException ex) {
     log.warn("CityNotFoundException caught: {}", ex.getMessage());
     return ResponseEntity.status(HttpStatus.NOT_FOUND) // Set HTTP status to 404

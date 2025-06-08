@@ -74,6 +74,7 @@ public class OpenWeatherApiClientImpl implements OpenWeatherApiClient {
    */
   private WeatherApiResponse loadFallbackResponse() {
     try {
+      log.info("Loading fallback response");
       return objectMapper.readValue(
           new ClassPathResource(properties.getFallbackPath()).getInputStream(),
           WeatherApiResponse.class);
